@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
+header {
+	margin: 0;
+	height: 10vh;
+	background-color: #2d333b;
+}
+
+
+.main {
+	display: flex;
+	flex-direction: row;
+
+	background-color: #1c2128;
+	border-top: 1px solid #2d333b;
+	border-right: 1px solid #2d333b;
+
+	padding: 0 !important;
+}
+
+.navigation {
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+
+	color: #fdfdfd;
+	font-family: 'EB Garamond', serif;
+	background-color: #22272e;
+	border-right: 1px solid #2d333b;
+
+	height: auto;
+
+	margin: 0 !important;
+	padding-top: 10px;
+}
+
+.navigation .node {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	background-color: #2d333b;
+	border-radius: 5px;
+	width: 90%;
+	margin-left: 5%;
+
+	font-size: 26px;
+
+}
+
+.navigation .node.picked {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navigation .node:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navigation .node span {
+	margin-left: 10px;
+	line-height: 50px;
+}
+
+.navigation.col-md-1 .node span {
+	display: none;
+}
+
+.navigation .node img {
+	max-width: 48px;
+	max-height: 48px;
+}
+
+.content {
+	min-height: calc(100vh - 1px); 
+	height: auto;
+
+	color: #fdfdfd;
+	font-family: 'EB Garamond', serif;
+}
+
+#storage {
+	display: none;
+}
+
+.content .container-fluid {
+	height: 100%;
+	background-color: #2d333b;
+	padding: 10px;
+	padding-left: 15px;
+	box-shadow: inset 1px 1px 15px 0px #000000;
+}
+
+#options {
+	display: flex;
+	flex-direction: column;
+}
+
+#item_red_container #options .option {
+	display: flex;
+	justify-content: center;
+	background-color: #22272e;
+
+	border-radius: 10px;
+	color: #fdfdfd;
+	font-family: 'EB Garamond', serif;
+	line-height: 35px;
+
+	height: 5vh;
+	margin-top: 5px;
+}
+
+.item-red-data {
+	height: 100%;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.item-list {
+	/*background-color: rgba(255, 255, 255, 0.05);	*/
+	margin-top: 10px;
+	height: 100%;
+}
+
+.item-list .node {
+	display: flex;
+	justify-content: safe left;
+	margin-bottom: 7px;
+}
+
+.item-list .node span {
+	line-height: 30px;
+	margin-left: 5px;
+}
