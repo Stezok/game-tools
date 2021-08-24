@@ -10,14 +10,12 @@
 	<!-- JavaScript Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 	
-	<link rel="stylesheet" href="/resource/css/style.css">
+	<link rel="stylesheet" href="/resource/css/index.css">
+	<link rel="stylesheet" href="/resource/css/redactor.css">
+	<link rel="stylesheet" href="/resource/css/scrollbar.css">
 	<script src="/resource/js/index.js"></script>
 </head>
 <body onload="init()">
-		<!-- 
-	<header>
-
-	</header> -->
 
 	<div class="main container-fluid col-md-12">
 		
@@ -31,34 +29,480 @@
 		</div>
 
 		<div id="content" class="content col-md-9">
-			
+			<div id="item-redactor" style="display: none;">
+				<div class="container-fluid" id="item_red_container">
+					<div class="item-red-data">
+						<div class="control">
+							<div id="control-bar">
+								<img id="add-item" src="/image/plus.png">
+								<img id="save-all" src="/image/save.png">
+								<img id="remove-item" src="/image/remove.png">
+							</div>
+						</div>
+						<div>
+							<input id="item-search-bar" placeholder="{{ .Placeholders.ItemSearchBar }}" type="text">
+						</div>
+						<div class="item-list" id="item-list">
+
+						</div>
+					</div>
+
+					<div class="redactor container">
+						<div class="row">
+							<div id="div-item-image">
+								<img src="" id="item-image" alt="">
+								<label for="item-image" id="name-label"></label>
+							</div>
+						</div>
+						<div class="row">
+							<div id="div-id">
+								<label for="item-id">ID</label>
+								<input type="text" placeholder="{{ .Placeholders.ItemID}}" id="item-id">
+							</div>
+							
+							<div id="div-item-type">
+								<label for="item-type">{{ .Labels.ItemType }}</label>
+								<select name="Тип предмета" id="item-type">
+									{{ range .ItemTypes }}
+									    <option value="{{ .ID }}">{{ .Name }}</option>
+									{{ end }}
+								</select>
+							</div>
+
+							<div id="div-item-image-path">
+								<label for="item-image-path">{{ .Labels.ItemImage }}</label>
+								<input type="text" placeholder="{{ .Placeholders.ItemImage }}" id="item-image-path">
+							</div>
+
+							<div id="div-ground-item-model">
+								<label for="ground-item-model">{{ .Labels.ItemGroundModel }}</label>
+								<input type="text" placeholder="{{ .Placeholders.ItemGroundModel }}" id="ground-item-model">
+							</div>
+
+							<div id="div-item-name">
+								<label for="item-name">{{ .Labels.ItemName }}</label>
+								<input type="text" placeholder="{{ .Placeholders.ItemName }}" id="item-name">
+							</div>
+						</div>
+						<div class="row">
+							<div id="div-item-description">
+								<label for="item-description">{{ .Labels.ItemDescription }}</label>
+								<textarea id="item-description" cols="50" rows="4" placeholder="{{ .Placeholders.ItemDescription }}"></textarea>
+							</div>
+						</div>
+						<div class="row small-input-container">
+							<div id="div-item-sript">
+								<label for="item-script">{{ .Labels.ItemScript }}</label>
+								<input type="text" value="0.0" id="item-script">
+							</div>
+							<div id="div-item-level">
+								<label for="item-level">{{ .Labels.ItemLevel }}</label>
+								<input type="text" value="0" id="item-level">
+							</div>
+							<div id="div-item-stack">
+								<label for="item-stack">{{ .Labels.ItemStack}}</label>
+								<input type="text" value="0" id="item-stack">
+							</div>
+							<div id="div-item-price">
+								<label for="item-price">{{ .Labels.ItemPrice }}</label>
+								<input type="text" value="0" id="item-price">
+							</div>
+							<div id="div-item-slots">
+								<label for="item-slots">{{ .Labels.ItemSlots }}</label>
+								<input type="text" value="0" id="item-slots">
+							</div>
+							<div id="div-item-effect">
+								<label for="item-effect">{{ .Labels.ItemEffect }}</label>
+								<input type="text" value="0" id="item-effect">
+							</div>
+							<div>
+								<label for="item-effect">{{ .Labels.ItemUsageEffect }}</label>
+								<input type="text" value="0" id="item-effect-second">
+							</div>
+						</div>
+						<div class="row div-items-actions">
+							<div id="items-actions-text">
+								{{ .Groups.Actions }}
+							</div>
+							<div id="items-actions-container">
+								<div id="div-item-repair">
+									<div class="round">
+										<input type="checkbox" id="item-repair">
+										<label for="item-repair"></label>
+									</div>
+									<label for="item-repair"> {{ .Labels.ItemRepair }} </label>
+								</div>
+								<div id="div-item-sell">
+									<div class="round">
+										<input type="checkbox" id="item-sell">
+										<label for="item-sell"></label>
+									</div>
+									<label for="item-sell"> {{ .Labels.ItemSell }}</label>
+								</div>
+								<div id="div-item-take">
+									<div class="round">
+										<input type="checkbox" id="item-take">
+										<label for="item-take"></label>
+									</div>
+									<label for="item-take">{{ .Labels.ItemTake }}</label>
+								</div>
+								<div id="div-item-throw">
+									<div class="round">
+										<input type="checkbox" id="item-throw">
+										<label for="item-throw"></label>
+									</div>
+									<label for="item-throw">{{ .Labels.ItemThrow }}</label>
+								</div>
+								<div id="div-item-delete">
+									<div class="round">
+										<input type="checkbox" id="item-delete">
+										<label for="item-delete"></label>
+									</div>
+									<label for="item-delete">{{ .Labels.ItemDelete }}</label>
+								</div>
+							</div>
+						</div>
+						<div class="row div-items-races">
+							<div id="items-races-text">
+								{{ .Groups.Races }}
+							</div>
+							<div id="races-container">
+								<div class="race">
+									<div class="race-checkbox">
+										<div class="round">
+											<input type="checkbox" id="item-lance">
+											<label for="item-lance"></label>
+										</div>
+										<label for="item-lance">{{ .Labels.ItemLance }}</label>
+									</div>
+									<div class="race-model">
+										<label for="item-model-lance">{{ .Labels.ItemModelLance }}</label>
+										<input type="text" id="item-model-lance" value="0">
+									</div>
+								</div>
+								<div class="race">
+									<div class="race-checkbox">
+										<div class="round">
+											<input type="checkbox" id="item-carsise">
+											<label for="item-carsise"></label>
+										</div>
+										<label for="item-carsise">{{ .Labels.ItemCarsise }}</label>
+									</div>
+									<div class="race-model">
+										<label for="item-model-carsise">{{ .Labels.ItemModelCarsise }}</label>
+										<input type="text" id="item-model-carsise" value="0">
+									</div>
+								</div>
+								<div class="race">
+									<div class="race-checkbox">
+										<div class="round">
+											<input type="checkbox" id="item-phyllis">
+											<label for="item-phyllis"></label>
+										</div>
+										<label for="item-phyllis">{{ .Labels.ItemPhyllis }}</label>
+									</div>
+									<div class="race-model">
+										<label for="item-model-phyllis">{{ .Labels.ItemModelPhyllis }}</label>
+										<input type="text" id="item-model-phyllis" value="0">
+									</div>
+								</div>
+								<div class="race">
+									<div class="race-checkbox">
+										<div class="round">
+											<input type="checkbox" id="item-ami">
+											<label for="item-ami"></label>
+										</div>
+										<label for="item-ami">{{ .Labels.ItemAmi }}</label>
+									</div>
+									<div class="race-model">
+										<label for="item-model-ami">{{ .Labels.ItemModelAmi }}</label>
+										<input type="text" id="item-model-ami" value="0">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row div-items-classes">
+							<div class="items-classes-text">
+								{{ .Groups.Classes }}
+							</div>
+							<div id="items-classes-container">
+								<div class="class-row">
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-begginer">
+											<label for="item-begginer"></label>
+										</div>
+										<label for="item-begginer">{{ .Labels.ItemNewbie }}</label>
+									</div>
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-swordmaster">
+											<label for="item-swordmaster"></label>
+										</div>
+										<label for="item-swordmaster">{{ .Labels.ItemSwordmaster }}</label>
+									</div>
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-hunter">
+											<label for="item-hunter"></label>
+										</div>
+										<label for="item-hunter">{{ .Labels.ItemHunter }}</label>
+									</div>
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-sailor">
+											<label for="item-sailor"></label>
+										</div>
+										<label for="item-sailor">{{ .Labels.ItemSailor }}</label>
+									</div>
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-healer">
+											<label for="item-healer"></label>
+										</div>
+										<label for="item-healer">{{ .Labels.ItemHealer }}</label>
+									</div>
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-champion">
+											<label for="item-champion"></label>
+										</div>
+										<label for="item-champion">{{ .Labels.ItemChampion }}</label>
+									</div>
+								</div>
+								<div class="class-row">
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-warrior">
+											<label for="item-warrior"></label>
+										</div>
+										<label for="item-warrior">{{ .Labels.ItemWarrior }}</label>
+									</div>
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-archer">
+											<label for="item-archer"></label>
+										</div>
+										<label for="item-archer">{{ .Labels.ItemArcher }}</label>
+									</div>
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-priest">
+											<label for="item-priest"></label>
+										</div>
+										<label for="item-priest">{{ .Labels.ItemPriest }}</label>
+									</div>
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-sealmaster">
+											<label for="item-sealmaster"></label>
+										</div>
+										<label for="item-sealmaster">{{ .Labels.ItemSealmaster }}</label>
+									</div>
+									<div>
+										<div class="round">
+											<input type="checkbox" id="item-voyager">
+											<label for="item-voyager"></label>
+										</div>
+										<label for="item-voyager">{{ .Labels.ItemVoyager }}</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row div-items-stats">
+							<div id="items-stats-text">
+								{{ .Groups.Stats }}
+							</div>
+							<div id="items-stats-container">
+								<div id="div-hold">
+									<div class="round">
+										<input type="checkbox" id="hold">
+										<label for="item-carsise"></label>
+									</div>
+									<label for="hold">{{ .Labels.Fixed }}</label>
+								</div>
+								<div class="stat-row">
+									<div class="stat">
+										<label for="item-strength">{{ .Labels.ItemStrength }}</label>
+										<div id="item-strength">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-strength-add">
+											<input type="text" placeholder=" {{ .Placeholders.Percent }} " id="item-strength-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-agility"> {{ .Labels.ItemAgility }} </label>
+										<div id="item-agility">
+											<input type="text" placeholder="
+											{{ .Placeholders.Static }}" id="item-agility-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-agility-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-vitality">{{ .Labels.ItemVitality }}</label>
+										<div id="item-vitality">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-vitality-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-vitality-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-spirit">{{ .Labels.ItemSpirit }}</label>
+										<div id="item-spirit">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-spirit-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-spirit-mlt">
+										</div>
+									</div>
+								</div>
+								<div class="stat-row">
+									<div class="stat">
+										<label for="item-accuracy">{{ .Labels.ItemAccuracy }}</label>
+										<div id="item-accuracy">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-accuracy-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-accuracy-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-luck">{{ .Labels.ItemLuck }}</label>
+										<div id="item-luck">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-luck-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-luck-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-min-attack">{{ .Labels.ItemMinAttack }}</label>
+										<div id="item-min-attack">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-min-attack-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-min-attack-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-max-attack">{{ .Labels.ItemMaxAttack }}</label>
+										<div id="item-max-attack">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-max-attack-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-max-attack-mlt">
+										</div>
+									</div>
+								</div>
+								<div class="stat-row">
+									<div class="stat">
+										<label for="item-attack-speed">{{ .Labels.ItemAttackSpeed }}</label>
+										<div id="item-attack-speed">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-attack-speed-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-attack-speed-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-hit-chance">{{ .Labels.ItemHitChance }}</label>
+										<div id="item-hit-chance">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-hit-chance-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-hit-chance-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-crit-chance">{{ .Labels.ItemCritChance }}</label>
+										<div id="item-crit-chance">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-crit-chance-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-crit-chance-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-move-speed">{{ .Labels.ItemMoveSpeed }}</label>
+										<div id="item-move-speed">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-move-speed-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-move-speed-mlt">
+										</div>
+									</div>
+								</div>
+								<div class="stat-row">
+									<div class="stat">
+										<label for="item-max-hp">{{ .Labels.ItemMaxHP }}</label>
+										<div id="item-max-hp">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-max-hp-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-max-hp-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-max-mp">{{ .Labels.ItemMaxMP }}</label>
+										<div id="item-max-mp">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-max-mp-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-max-mp-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-hp-regen">{{ .Labels.ItemHPRegen }}</label>
+										<div id="item-hp-regen">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-hp-regen-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-hp-regen-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-mp-regen">{{ .Labels.ItemMPRegen }}</label>
+										<div id="item-mp-regen">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-mp-regen-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-mp-regen-mlt">
+										</div>
+									</div>
+								</div>
+								<div class="stat-row">
+									<div class="stat">
+										<label for="item-armour">{{ .Labels.ItemArmour }}</label>
+										<div id="item-armour">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-armour-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-armour-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-phys-armour">{{ .Labels.ItemPhysArmour }}</label>
+										<div id="item-phys-armour">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-phys-armour-add">
+										<!-- 	<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-phys-armour-mlt"> -->
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-evasion">{{ .Labels.ItemEvasion }}</label>
+										<div id="item-evasion">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-evasion-add">
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-evasion-mlt">
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-durability">{{ .Labels.ItemDurability }}</label>
+										<div id="item-durability">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-durability-add"><!-- 
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-durability-mlt"> -->
+										</div>
+									</div>
+									<div class="stat">
+										<label for="item-energy">{{ .Labels.ItemEnergy }}</label>
+										<div id="item-energy">
+											<input type="text" placeholder="{{ .Placeholders.Static }}" id="item-energy-add"><!-- 
+											<input type="text" placeholder="{{ .Placeholders.Percent }}" id="item-energy-mlt"> -->
+										</div>
+									</div>
+								</div><!-- 
+								<div class="stat-row last">
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>
 
-	<div id="storage">
+	<!-- <div id="storage">
 		<div id="storage_item_red">
 			<div class="container-fluid" id="item_red_container">
-				<div id="options" class="col-md-3">
-					<div class="option">Добавить</div>
-					<div class="option">Импорт</div>
-					<div class="option">Экспорт</div>
-					<div class="item-red-data">
-						<input id="item-search-bar" type="text">
-						<div class="item-list">
-							<div class="node">
-								<img src="/image/icon/e0758.png">
-								<span>9999 Body armour</span>
-							</div>
-							<div class="node">
-								<img src="/image/icon/e1001.png">
-								<span>2134 Pumpkin</span>
-							</div>
-							<div class="node">
-								<img src="/image/icon/e1002.png">
-								<span>1111 Skull</span>
-							</div>
+				<div class="item-red-data">
+					<div class="control">
+						<div id="control-bar">
+							<img id="add-item" src="/image/plus.png">
+							<img id="save-all" src="/image/save.png">
 						</div>
+						<input id="item-search-bar" type="text">
+					</div>
+					<div class="item-list" id="item-list">
+
 					</div>
 				</div>
 
@@ -67,6 +511,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </body>
 </html>

@@ -1,6 +1,11 @@
 package main
 
-import "github.com/Stezok/game-tools/internal/handler/app"
+import (
+	"log"
+
+	"github.com/Stezok/game-tools/internal/handler/app"
+	"github.com/Stezok/game-tools/internal/itemredactor"
+)
 
 func main() {
 
@@ -8,6 +13,9 @@ func main() {
 		PathToResources: "../../web",
 		PathToImages:    "../../assets",
 		PathToHTML:      "../../web/html/*.html",
+
+		Service: itemredactor.NewItemService("./item.txt"),
+		Logger:  log.Default(),
 	}
 
 	handler.InitRoutes().Run()
