@@ -826,12 +826,16 @@ function cancle_action() {
 	document.getElementById("cancle-item-action").style.display = "none"
 }
 
+let father_id = 0
 async function show_delete_cancle(id) {
 	let cancle = document.getElementById("cancle-item-action")
+	let father = ++father_id
 	cancle.style.display = "flex"
 	cancle_id = id
-	await sleep(5000)
-	cancle.style.display = "none"
+	await sleep(10 * 1000)
+	if(father == father_id) {
+		cancle.style.display = "none"
+	}
 }
 
 async function init() {
