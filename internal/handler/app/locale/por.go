@@ -3,6 +3,11 @@ package locale
 var PT_INDEX_LOCALE = IndexTemplate{
 	Language: "Português",
 
+	Text: IndexText{
+		ItemDeleted: "O item foi removido.",
+		ItemReturn:  "Restaurar",
+	},
+
 	Placeholders: IndexPlaceholdes{
 		ItemSearchBar:   "ID ou nome do item...",
 		ItemID:          "ID...",

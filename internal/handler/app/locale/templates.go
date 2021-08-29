@@ -84,9 +84,15 @@ type IndexGroups struct {
 	Stats   string
 }
 
+type IndexText struct {
+	ItemDeleted string
+	ItemReturn  string
+}
+
 type IndexTemplate struct {
 	Language string
 
+	Text         IndexText
 	Placeholders IndexPlaceholdes
 	Labels       IndexLabels
 	Groups       IndexGroups

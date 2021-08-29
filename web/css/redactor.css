@@ -311,7 +311,7 @@ input, textarea, select {
 
 #cancle-item-action {
     display: none;
-    justify-self: center;
+    justify-content: center;
 
     height: 7vh;
     width: 16vw;

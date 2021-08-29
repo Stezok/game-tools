@@ -3,6 +3,11 @@ package locale
 var RU_INDEX_LOCALE = IndexTemplate{
 	Language: "Русский",
 
+	Text: IndexText{
+		ItemDeleted: "Предмет был удален.",
+		ItemReturn:  "Восстановить",
+	},
+
 	Placeholders: IndexPlaceholdes{
 		ItemSearchBar:   "ID или название предмета...",
 		ItemID:          "ID...",
