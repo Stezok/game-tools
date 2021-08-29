@@ -1,6 +1,8 @@
 package locale
 
 var RU_INDEX_LOCALE = IndexTemplate{
+	Language: "Русский",
+
 	Placeholders: IndexPlaceholdes{
 		ItemSearchBar:   "ID или название предмета...",
 		ItemID:          "ID...",

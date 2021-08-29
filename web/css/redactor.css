@@ -308,3 +308,27 @@ input, textarea, select {
 #div-hold div {
     display: inline-block;
 }
+
+#cancle-item-action {
+    display: none;
+    justify-self: center;
+
+    height: 7vh;
+    width: 16vw;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding: 8px;
+    line-height: 32px;
+
+
+    color: #fff;
+    position: absolute;
+    left: 50vw;
+	bottom: 10px;
+}
+
+#cancle-item-action div {
+    margin-left: 6px;
+    color: #fff;
+    text-decoration: underline;
+}

@@ -1,0 +1,101 @@
+{{ define "lang-select" }}
+<style>
+    .langs {
+        display: flex;
+        justify-content: center;
+    }
+
+    #lang-button img {
+    	filter: invert(100%);
+    }
+
+    #lang-selector {
+        margin-top: 20px;
+        width: 100px;
+
+        /* -webkit-box-align:center;
+        -webkit-box-pack:center;
+        display:-webkit-box; */
+    }
+
+    #lang-button {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #globus-img {
+        margin-right: 10px;
+    }
+
+    #lang {
+        line-height: 2vh;
+        margin-right: 10px;
+    }
+
+    #lang-selector img {
+        max-width: 15px;
+        max-height: 15px;
+    }
+
+    #lang-options {
+        display: none;
+        position: relative;
+        top: 1vh;
+    }
+
+    .lang-option {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+
+        margin-top: 15px;
+
+        line-height: 2vh;
+    }
+
+</style>
+
+<script>
+
+    function redirect_lang(event) {
+        console.log(event.currentTarget)
+        window.location.replace(event.currentTarget.dataset.link)
+    }
+
+    function show_langs() {
+        if(document.getElementById("lang-options").style.display == "none") {
+            document.getElementById("lang-options").style.display = "block"
+        } else {
+            document.getElementById("lang-options").style.display = "none"
+        }
+    }
+</script>
+
+<div class="lang">
+    <div onload="init_lang()" id="lang-selector">
+        <div id="lang-button" onclick="show_langs()">
+            <img id="globus-img" src="/image/globus.png" alt="">
+            <div id="lang"> 
+                {{ .Language }}
+            </div>
+            <img src="/image/down-arrow.png" alt="">
+        </div>
+    
+        <div id="lang-options" style="display: none;">
+            <div class="lang-option" data-link="/eng" onclick="redirect_lang(event)">
+                <img src="https://www.countryflags.io/us/flat/64.png" alt="">
+                <span>English</span>
+            </div>
+            <div class="lang-option" data-link="/rus" onclick="redirect_lang(event)"    >
+                <img src="https://www.countryflags.io/ru/flat/64.png" alt="">
+                <span>Русский</span>
+            </div>
+            <div class="lang-option" data-link="/por" onclick="redirect_lang(event)">
+                <img src="https://www.countryflags.io/pt/flat/64.png" alt="">
+                <span>Português</span>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}

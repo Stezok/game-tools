@@ -1,6 +1,8 @@
 package locale
 
 var PT_INDEX_LOCALE = IndexTemplate{
+	Language: "Português",
+
 	Placeholders: IndexPlaceholdes{
 		ItemSearchBar:   "ID ou nome do item...",
 		ItemID:          "ID...",

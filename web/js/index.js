@@ -809,6 +809,31 @@ async function update_with_search(search) {
 	}
 }
 
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+let cancle_id = -1
+function cancle_action() {
+	items[cancle_id].deleted = false
+	let search = document.getElementById("item-search-bar").value
+	if(search == "") {
+		update_list()
+	} else {
+		update_with_search(search)
+	}
+	document.getElementById("cancle-item-action").style.display = "none"
+}
+
+async function show_delete_cancle(id) {
+	let cancle = document.getElementById("cancle-item-action")
+	cancle.style.display = "flex"
+	cancle_id = id
+	await sleep(5000)
+	cancle.style.display = "none"
+}
+
 async function init() {
 	let elems = document.getElementsByClassName("node")
 	for(i = 0;i < elems.length;i++) {
@@ -876,6 +901,10 @@ async function init() {
 		let id = event.target.dataset.id
 		console.log(id)
 		items[id].deleted = true
+
+		event.target.style.display = "none"
+		document.getElementsByClassName("redactor")[0].style.display = "none"
+	
 		let search = document.getElementById("item-search-bar").value
 		if(search == "") {
 			update_list()
@@ -883,9 +912,10 @@ async function init() {
 			update_with_search(search)
 		}
 
-		event.target.style.display = "none"
-		document.getElementsByClassName("redactor")[0].style.display = "none"
+		show_delete_cancle(id)
 	})
+
+	document.querySelector("#cancle-item-action div").onclick = cancle_action
 
 	await request_items()
 	update_list()

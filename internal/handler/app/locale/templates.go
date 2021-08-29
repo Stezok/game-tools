@@ -85,6 +85,8 @@ type IndexGroups struct {
 }
 
 type IndexTemplate struct {
+	Language string
+
 	Placeholders IndexPlaceholdes
 	Labels       IndexLabels
 	Groups       IndexGroups
