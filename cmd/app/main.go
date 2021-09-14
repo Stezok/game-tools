@@ -19,7 +19,6 @@ func main() {
 		CharacterService: character.NewCharacterService("./character.txt"),
 		Logger:           log.Default(),
 	}
-	log.Print(handler.CharacterService.GetCharacters())
 
 	handler.InitRoutes().Run()
 }
