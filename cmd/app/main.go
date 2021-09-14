@@ -4,7 +4,8 @@ import (
 	"log"
 
 	"github.com/Stezok/game-tools/internal/handler/app"
-	"github.com/Stezok/game-tools/internal/itemredactor"
+	"github.com/Stezok/game-tools/internal/redactor/character"
+	"github.com/Stezok/game-tools/internal/redactor/item"
 )
 
 func main() {
@@ -14,9 +15,11 @@ func main() {
 		PathToImages:    "../../assets",
 		PathToHTML:      "../../web/html/*.html",
 
-		Service: itemredactor.NewItemService("./item.txt"),
-		Logger:  log.Default(),
+		ItemService:      item.NewItemService("./item.txt"),
+		CharacterService: character.NewCharacterService("./character.txt"),
+		Logger:           log.Default(),
 	}
+	log.Print(handler.CharacterService.GetCharacters())
 
 	handler.InitRoutes().Run()
 }

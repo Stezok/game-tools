@@ -1,0 +1,157 @@
+#char-red-container {
+	display: flex;
+	flex-direction: row;
+}
+
+#char-search-bar {
+	height: 4vh;
+	width: 100%;
+}
+
+.char-red-data {
+	height: 100%;
+	width: 20vw;
+	margin-top: 10px;
+	margin-right: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.char-list {
+	/*background-color: rgba(255, 255, 255, 0.05);	*/
+	margin-top: 10px;
+	height: 90vh;
+
+	overflow-y: auto;
+	white-space: nowrap;
+}
+
+.char-list .node {
+	display: block;
+	justify-content: safe left;
+	margin-bottom: 7px;
+}
+
+.char-list .node span {
+	line-height: 30px;
+	margin-left: 5px;
+}
+
+#char-list .node span {
+	cursor: default;
+}
+
+#char-list .node:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+#char-list .node.picked {
+	background-color: rgba(255, 255, 255, 0.1);	
+}
+
+#div-char-name {
+	margin-bottom: 15px;
+}
+
+.char_row {
+	display: flex;
+	flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.char_row div {
+    flex: 0 0 1;
+    margin-right: 10px;
+
+    display: flex;
+    flex-direction: column;
+    
+    width: auto;
+}
+
+.char_row label {
+    font-size: 17px;
+}
+
+#char-red-container .redactor {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#char-control-bar {
+	position: fixed;
+	right: 5px;
+	bottom: 5px;
+
+	display: flex;
+	flex-direction: column;
+}
+
+
+#add-char {	
+	filter: invert(100%);
+	
+	width: 36px;
+	height: 36px;
+	margin: 8px;
+}
+
+#save-all-char {
+	filter: invert(100%);
+
+	width: 36px;
+	height: 36px;
+	margin: 8px;
+}
+
+#remove-char {
+	display: none;
+	filter: invert(100%);
+
+	width: 36px;
+	height: 36px;
+	margin: 8px;	
+}
+
+#cancle-char-action {
+    display: none;
+    justify-content: center;
+
+    height: 7vh;
+    width: 16vw;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding: 8px;
+    line-height: 32px;
+
+
+    color: #fff;
+    position: absolute;
+    left: 50vw;
+	bottom: 10px;
+}
+
+#cancle-char-action div {
+    margin-left: 6px;
+    color: #fff;
+    text-decoration: underline;
+}
+
+#cancle-char-action {
+    display: none;
+    justify-content: center;
+
+    height: 7vh;
+    width: 18vw;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding: 8px;
+    line-height: 32px;
+
+
+    color: #fff;
+    position: absolute;
+    left: 50vw;
+	bottom: 10px;
+}

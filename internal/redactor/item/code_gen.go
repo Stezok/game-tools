@@ -1,4 +1,4 @@
-package itemredactor
+package item
 
 import (
 	"encoding/csv"

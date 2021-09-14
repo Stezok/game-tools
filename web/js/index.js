@@ -68,7 +68,7 @@ function pick_item_node(id) {
 	document.getElementById("remove-item").style.display = "block"
 	document.getElementById("remove-item").dataset.id = item.uniq_id
 	
-	document.getElementsByClassName("redactor")[0].style.display = "block"
+	document.querySelector("redactor")[0].style.display = "block"
 
 	let name_label = document.getElementById("name-label")
 	name_label.innerHTML = item.Name
@@ -765,12 +765,16 @@ function pick_item_node(id) {
 	}
 }
 
-function make_node(item) {
+function make_item_node(item) {
 	return `
 		<div class="node" id="item${item.uniq_id}" onclick="pick_item_node(${item.uniq_id})">
 			<img src="/image/icon/${item.IconName}.png">
 			<span>${item.ID} ${item.Name}</span>
 		</div>`
+}
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function htmlToElement(html) {
@@ -780,7 +784,7 @@ function htmlToElement(html) {
     return template.content.firstChild;
 }
 
-async function update_list() {
+async function update_item_list() {
 	let list = document.getElementById("item-list")
 	list.innerHTML = ""
 	for(i = 0;i < Math.min(400, items.length);i++) {
@@ -789,11 +793,11 @@ async function update_list() {
 			continue
 		}
 		
-		list.insertAdjacentElement('beforeend', htmlToElement(make_node(item)))
+		list.insertAdjacentElement('beforeend', htmlToElement(make_item_node(item)))
 	}
 }
 
-async function update_with_search(search) {
+async function update_items_with_search(search) {
 	let inserted = 0
 	let list = document.getElementById("item-list")
 	list.innerHTML = ""
@@ -804,30 +808,25 @@ async function update_with_search(search) {
 		let name = `${items[i].ID} ${items[i].Name}`
 		if(name.includes(search)) {		
 			inserted++
-			list.insertAdjacentElement('beforeend', htmlToElement(make_node(items[i])))
+			list.insertAdjacentElement('beforeend', htmlToElement(make_item_node(items[i])))
 		}
 	}
 }
 
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
 let cancle_id = -1
-function cancle_action() {
+function cancle_item_action() {
 	items[cancle_id].deleted = false
 	let search = document.getElementById("item-search-bar").value
 	if(search == "") {
-		update_list()
+		update_item_list()
 	} else {
-		update_with_search(search)
+		update_items_with_search(search)
 	}
 	document.getElementById("cancle-item-action").style.display = "none"
 }
 
 let father_id = 0
-async function show_delete_cancle(id) {
+async function show_item_delete_cancle(id) {
 	let cancle = document.getElementById("cancle-item-action")
 	let father = ++father_id
 	cancle.style.display = "flex"
@@ -839,7 +838,7 @@ async function show_delete_cancle(id) {
 }
 
 async function init() {
-	let elems = document.getElementsByClassName("node")
+	let elems = document.querySelectorAll(".navigation .node")
 	for(i = 0;i < elems.length;i++) {
 		elems[i].onclick = (event) => {
 			event.target.onclick = null
@@ -847,19 +846,62 @@ async function init() {
 		}
 	}
 
-	document.getElementById("item_red").addEventListener('pick', () => {
+	document.getElementById("item_red").addEventListener('pick', (event) => {
+		let collection = document.getElementsByClassName("_redactor")
+		for(let item of collection) {
+			item.style.display = "none"
+		}
+		for(let nav of document.querySelectorAll(".navigation .node")) {
+			nav.onclick = (event) => {
+				pick_tool(event.currentTarget)
+			}
+		}
+		event.currentTarget.onclick = (event) => {
+			remove_tool(event.currentTarget)
+		}
 		document.getElementById("item-redactor").style.display = "block"
-		// html = document.getElementById("storage_item_red").innerHTML
-		// document.getElementById("content").innerHTML = html
+	}, false)
+	document.getElementById("item_red").addEventListener('depick', () => {
+		let collection = document.getElementsByClassName("_redactor")
+		for(let item of collection) {
+			item.style.display = "none"
+		}
+		for(let nav of document.querySelectorAll(".navigation .node")) {
+			nav.onclick = (event) => {
+				pick_tool(event.currentTarget)
+			}
+		}
+		document.getElementById("item-redactor").style.display = "none"
 	}, false)
 
-	document.getElementById("item_red").addEventListener('depick', () => {
-		document.getElementById("item-redactor").style.display = "none"
-		// content = document.getElementById("content")
-		// html = content.innerHTML
-		// document.getElementById("storage_item_red").innerHTML = html
-		// content.innerHTML = ""
+	document.getElementById("char_red").addEventListener('pick', (event) => {
+		let collection = document.getElementsByClassName("_redactor")
+		for(let item of collection) {
+			item.style.display = "none"
+		}
+		for(let nav of document.querySelectorAll(".navigation .node")) {
+			nav.onclick = (event) => {
+				pick_tool(event.currentTarget)
+			}
+		}
+		event.currentTarget.onclick = (event) => {
+			remove_tool(event.currentTarget)
+		}
+		document.getElementById("char-redactor").style.display = "block"
 	}, false)
+	document.getElementById("char_red").addEventListener('depick', () => {
+		let collection = document.getElementsByClassName("_redactor")
+		for(let item of collection) {
+			item.style.display = "none"
+		}
+		for(let nav of document.querySelectorAll(".navigation .node")) {
+			nav.onclick = (event) => {
+				pick_tool(event.currentTarget)
+			}
+		}
+		document.getElementById("char-redactor").style.display = "none"
+	}, false)
+
 
 	document.getElementById("item-search-bar").addEventListener('input', () => {
 		patter = []
@@ -867,10 +909,10 @@ async function init() {
 		list.innerHTML = ""
 		search = document.getElementById("item-search-bar").value 
 		if(search == "") {
-			update_list()
+			update_item_list()
 			return
 		}
-		update_with_search(search)
+		update_items_with_search(search)
 	})
 
 	document.getElementById("save-all").addEventListener('click', () => {
@@ -897,7 +939,7 @@ async function init() {
 		item.deleted = false
 		item.Name = "NEW ITEM"
 		items.push(item)
-		document.getElementById("item-list").insertAdjacentElement('afterbegin', htmlToElement(make_node(item)))
+		document.getElementById("item-list").insertAdjacentElement('afterbegin', htmlToElement(make_item_node(item)))
 		pick_item_node(item.uniq_id)
 	})
 
@@ -911,16 +953,21 @@ async function init() {
 	
 		let search = document.getElementById("item-search-bar").value
 		if(search == "") {
-			update_list()
+			update_item_list()
 		} else {
-			update_with_search(search)
+			update_items_with_search(search)
 		}
 
-		show_delete_cancle(id)
+		show_item_delete_cancle(id)
 	})
 
-	document.querySelector("#cancle-item-action div").onclick = cancle_action
+	document.querySelector("#cancle-item-action div").onclick = cancle_item_action
+
+	let event = new Event("load")
+	for(let elem of document.getElementsByClassName("_redactor")) {
+		elem.dispatchEvent(event)
+	}
 
 	await request_items()
-	update_list()
+	update_item_list()
 }	

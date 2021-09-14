@@ -1,7 +1,8 @@
 package app
 
 import (
-	"github.com/Stezok/game-tools/internal/itemredactor"
+	"github.com/Stezok/game-tools/internal/redactor/character"
+	"github.com/Stezok/game-tools/internal/redactor/item"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,8 +15,9 @@ type AppHandler struct {
 	PathToImages    string
 	PathToHTML      string
 
-	Logger  Logger
-	Service *itemredactor.ItemService
+	Logger           Logger
+	CharacterService *character.CharacterService
+	ItemService      *item.ItemService
 }
 
 func (h *AppHandler) InitRoutes() *gin.Engine {
@@ -32,6 +34,9 @@ func (h *AppHandler) InitRoutes() *gin.Engine {
 
 	router.GET("/items", h.HandleGetItems)
 	router.POST("/items", h.HandlePostItems)
+
+	router.GET("/characters", h.HandleGetCharacters)
+	router.POST("/characters", h.HandlePostCharacters)
 
 	return router
 }

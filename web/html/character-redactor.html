@@ -1,0 +1,599 @@
+{{ define "character-redactor" }}
+
+<script src="/resource/js/char_redactor.js"></script>
+<link rel="stylesheet" href="/resource/css/char_redactor.css">
+<div onload="init_char()" id="char-redactor" class="_redactor" style="display: none;">
+    <div class="container-fluid" id="char-red-container">
+        <div class="char-red-data">
+            <div class="control">
+                <div id="cancle-char-action">
+                    {{ .Text.CharDeleted }}<div>{{ .Text.CharReturn }}</div>
+                </div>
+                <div id="char-control-bar">
+                    <img id="add-char" src="/image/plus.png">
+                    <img id="save-all-char" src="/image/save.png">
+                    <img id="remove-char" src="/image/remove.png">
+                </div>
+            </div>
+            <div>
+                <input id="char-search-bar" placeholder="{{ .Placeholders.CharSearchBar }}" type="text">
+            </div>
+            <div class="char-list" id="char-list">
+
+            </div>
+        </div>
+
+        <div class="redactor container">
+            <div id="div-char-name" class="char_header">
+                <h3 id="char-Name"></h3>
+            </div>
+            <div class="char_row">	
+                <div id="div-ID">
+                    <label for="char-ID">{{ .Labels.CharID }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharID}}" id="char-ID">
+                </div>
+                <div id="div-Description">
+                    <label for="char-Description">{{ .Labels.CharDescription }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharDescription}}" id="char-Description">
+                </div>
+                <div id="div-ModelCategory">
+                    <label for="char-ModelCategory">{{ .Labels.CharModelCategory }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharModelCategory}}" id="char-ModelCategory">
+                </div>
+                <div id="div-ModelType">
+                    <label for="char-ModelType">{{ .Labels.CharModelType }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharModelType}}" id="char-ModelType">
+                </div>
+                <div id="div-LogicType">
+                    <label for="char-LogicType">{{ .Labels.CharLogicType }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharLogicType}}" id="char-LogicType">
+                </div>
+            </div>
+            <div class="char_row">
+                <div id="div-FrameworkNumber">
+                    <label for="char-FrameworkNumber">{{ .Labels.CharFrameworkNumber }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharFrameworkNumber}}" id="char-FrameworkNumber">
+                </div>
+                <div id="div-SuiteSerial">
+                    <label for="char-SuiteSerial">{{ .Labels.CharSuiteSerial }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharSuiteSerial}}" id="char-SuiteSerial">
+                </div>
+                <div id="div-SuiteQuantity">
+                    <label for="char-SuiteQuantity">{{ .Labels.CharSuiteQuantity }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharSuiteQuantity}}" id="char-SuiteQuantity">
+                </div>
+                <div id="div-PartFACE">
+                    <label for="char-PartFACE">{{ .Labels.CharPartFACE }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPartFACE}}" id="char-PartFACE">
+                </div>
+                <div id="div-PartHeadApparel">
+                    <label for="char-PartHeadApparel">{{ .Labels.CharPartHeadApparel }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPartHeadApparel}}" id="char-PartHeadApparel">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-PartArmor">
+                    <label for="char-PartArmor">{{ .Labels.CharPartArmor }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPartArmor}}" id="char-PartArmor">
+                </div>
+                <div id="div-PartGloves">
+                    <label for="char-PartGloves">{{ .Labels.CharPartGloves }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPartGloves}}" id="char-PartGloves">
+                </div>
+                <div id="div-PartShoes">
+                    <label for="char-PartShoes">{{ .Labels.CharPartShoes }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPartShoes}}" id="char-PartShoes">
+                </div>
+                <div id="div-PartWeapon">
+                    <label for="char-PartWeapon">{{ .Labels.CharPartWeapon }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPartWeapon}}" id="char-PartWeapon">
+                </div>
+                <div id="div-Part2ndWeap">
+                    <label for="char-Part2ndWeap">{{ .Labels.CharPart2ndWeap }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPart2ndWeap}}" id="char-Part2ndWeap">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-PartWings">
+                    <label for="char-PartWings">{{ .Labels.CharPartWings }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPartWings}}" id="char-PartWings">
+                </div>
+                <div id="div-FeffID">
+                    <label for="char-FeffID">{{ .Labels.CharFeffID }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharFeffID}}" id="char-FeffID">
+                </div>
+                <div id="div-EeffID">
+                    <label for="char-EeffID">{{ .Labels.CharEeffID }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharEeffID}}" id="char-EeffID">
+                </div>
+                <div id="div-SpecialEffectActionSerial">
+                    <label for="char-SpecialEffectActionSerial">{{ .Labels.CharSpecialEffectActionSerial }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharSpecialEffectActionSerial}}" id="char-SpecialEffectActionSerial">
+                </div>
+                <div id="div-Shadow">
+                    <label for="char-Shadow">{{ .Labels.CharShadow }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharShadow}}" id="char-Shadow">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-ActionID">
+                    <label for="char-ActionID">{{ .Labels.CharActionID }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharActionID}}" id="char-ActionID">
+                </div>
+                <div id="div-Transparency">
+                    <label for="char-Transparency">{{ .Labels.CharTransparency }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTransparency}}" id="char-Transparency">
+                </div>
+                <div id="div-MovingSoundEffect">
+                    <label for="char-MovingSoundEffect">{{ .Labels.CharMovingSoundEffect }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMovingSoundEffect}}" id="char-MovingSoundEffect">
+                </div>
+                <div id="div-BreathingSoundEffect">
+                    <label for="char-BreathingSoundEffect">{{ .Labels.CharBreathingSoundEffect }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharBreathingSoundEffect}}" id="char-BreathingSoundEffect">
+                </div>
+                <div id="div-DeathSoundEffect">
+                    <label for="char-DeathSoundEffect">{{ .Labels.CharDeathSoundEffect }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharDeathSoundEffect}}" id="char-DeathSoundEffect">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-CanItBeControlled">
+                    <label for="char-CanItBeControlled">{{ .Labels.CharCanItBeControlled }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharCanItBeControlled}}" id="char-CanItBeControlled">
+                </div>
+                <div id="div-AreaLimitation">
+                    <label for="char-AreaLimitation">{{ .Labels.CharAreaLimitation }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharAreaLimitation}}" id="char-AreaLimitation">
+                </div>
+                <div id="div-AltitudeExcursion">
+                    <label for="char-AltitudeExcursion">{{ .Labels.CharAltitudeExcursion }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharAltitudeExcursion}}" id="char-AltitudeExcursion">
+                </div>
+                <div id="div-ItemsThatCanBeEquipped">
+                    <label for="char-ItemsThatCanBeEquipped">{{ .Labels.CharItemsThatCanBeEquipped }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharItemsThatCanBeEquipped}}" id="char-ItemsThatCanBeEquipped">
+                </div>
+                <div id="div-Length">
+                    <label for="char-Length">{{ .Labels.CharLength }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharLength}}" id="char-Length">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Width">
+                    <label for="char-Width">{{ .Labels.CharWidth }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharWidth}}" id="char-Width">
+                </div>
+                <div id="div-Height">
+                    <label for="char-Height">{{ .Labels.CharHeight }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharHeight}}" id="char-Height">
+                </div>
+                <div id="div-CollisionRange">
+                    <label for="char-CollisionRange">{{ .Labels.CharCollisionRange }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharCollisionRange}}" id="char-CollisionRange">
+                </div>
+                <div id="div-Birth">
+                    <label for="char-Birth">{{ .Labels.CharBirth }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharBirth}}" id="char-Birth">
+                </div>
+                <div id="div-Dead">
+                    <label for="char-Dead">{{ .Labels.CharDead }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharDead}}" id="char-Dead">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-BirthEffect">
+                    <label for="char-BirthEffect">{{ .Labels.CharBirthEffect }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharBirthEffect}}" id="char-BirthEffect">
+                </div>
+                <div id="div-DeathEffect">
+                    <label for="char-DeathEffect">{{ .Labels.CharDeathEffect }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharDeathEffect}}" id="char-DeathEffect">
+                </div>
+                <div id="div-HibernateAction">
+                    <label for="char-HibernateAction">{{ .Labels.CharHibernateAction }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharHibernateAction}}" id="char-HibernateAction">
+                </div>
+                <div id="div-DeathInstantAction">
+                    <label for="char-DeathInstantAction">{{ .Labels.CharDeathInstantAction }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharDeathInstantAction}}" id="char-DeathInstantAction">
+                </div>
+                <div id="div-RemainingHPEffectDisplay">
+                    <label for="char-RemainingHPEffectDisplay">{{ .Labels.CharRemainingHPEffectDisplay }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharRemainingHPEffectDisplay}}" id="char-RemainingHPEffectDisplay">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-AttackCanBeSwerve">
+                    <label for="char-AttackCanBeSwerve">{{ .Labels.CharAttackCanBeSwerve }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharAttackCanBeSwerve}}" id="char-AttackCanBeSwerve">
+                </div>
+                <div id="div-ConfirmToUseBlownAway">
+                    <label for="char-ConfirmToUseBlownAway">{{ .Labels.CharConfirmToUseBlownAway }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharConfirmToUseBlownAway}}" id="char-ConfirmToUseBlownAway">
+                </div>
+                <div id="div-Script">
+                    <label for="char-Script">{{ .Labels.CharScript }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharScript}}" id="char-Script">
+                </div>
+                <div id="div-WeaponUsed">
+                    <label for="char-WeaponUsed">{{ .Labels.CharWeaponUsed }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharWeaponUsed}}" id="char-WeaponUsed">
+                </div>
+                <div id="div-SkillID">
+                    <label for="char-SkillID">{{ .Labels.CharSkillID }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharSkillID}}" id="char-SkillID">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-MonsterSkillRate">
+                    <label for="char-MonsterSkillRate">{{ .Labels.CharMonsterSkillRate }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMonsterSkillRate}}" id="char-MonsterSkillRate">
+                </div>
+                <div id="div-ItemIDToDrop">
+                    <label for="char-ItemIDToDrop">{{ .Labels.CharItemIDToDrop }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharItemIDToDrop}}" id="char-ItemIDToDrop">
+                </div>
+                <div id="div-ItemDroprate">
+                    <label for="char-ItemDroprate">{{ .Labels.CharItemDroprate }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharItemDroprate}}" id="char-ItemDroprate">
+                </div>
+                <div id="div-QuantityLimit">
+                    <label for="char-QuantityLimit">{{ .Labels.CharQuantityLimit }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharQuantityLimit}}" id="char-QuantityLimit">
+                </div>
+                <div id="div-FatalityRate">
+                    <label for="char-FatalityRate">{{ .Labels.CharFatalityRate }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharFatalityRate}}" id="char-FatalityRate">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-PrefixLevel">
+                    <label for="char-PrefixLevel">{{ .Labels.CharPrefixLevel }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPrefixLevel}}" id="char-PrefixLevel">
+                </div>
+                <div id="div-QuestDropID">
+                    <label for="char-QuestDropID">{{ .Labels.CharQuestDropID }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharQuestDropID}}" id="char-QuestDropID">
+                </div>
+                <div id="div-Rate">
+                    <label for="char-Rate">{{ .Labels.CharRate }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharRate}}" id="char-Rate">
+                </div>
+                <div id="div-AI">
+                    <label for="char-AI">{{ .Labels.CharAI }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharAI}}" id="char-AI">
+                </div>
+                <div id="div-Turning">
+                    <label for="char-Turning">{{ .Labels.CharTurning }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTurning}}" id="char-Turning">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Vision">
+                    <label for="char-Vision">{{ .Labels.CharVision }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharVision}}" id="char-Vision">
+                </div>
+                <div id="div-Noise">
+                    <label for="char-Noise">{{ .Labels.CharNoise }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharNoise}}" id="char-Noise">
+                </div>
+                <div id="div-GetExp">
+                    <label for="char-GetExp">{{ .Labels.CharGetExp }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharGetExp}}" id="char-GetExp">
+                </div>
+                <div id="div-Light">
+                    <label for="char-Light">{{ .Labels.CharLight }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharLight}}" id="char-Light">
+                </div>
+                <div id="div-MobExp">
+                    <label for="char-MobExp">{{ .Labels.CharMobExp }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMobExp}}" id="char-MobExp">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-MonsterLVL">
+                    <label for="char-MonsterLVL">{{ .Labels.CharMonsterLVL }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMonsterLVL}}" id="char-MonsterLVL">
+                </div>
+                <div id="div-MaxHP">
+                    <label for="char-MaxHP">{{ .Labels.CharMaxHP }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMaxHP}}" id="char-MaxHP">
+                </div>
+                <div id="div-MinHP">
+                    <label for="char-MinHP">{{ .Labels.CharMinHP }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMinHP}}" id="char-MinHP">
+                </div>
+                <div id="div-MaxSP">
+                    <label for="char-MaxSP">{{ .Labels.CharMaxSP }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMaxSP}}" id="char-MaxSP">
+                </div>
+                <div id="div-MinSp">
+                    <label for="char-MinSp">{{ .Labels.CharMinSp }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMinSp}}" id="char-MinSp">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-MinAtk">
+                    <label for="char-MinAtk">{{ .Labels.CharMinAtk }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMinAtk}}" id="char-MinAtk">
+                </div>
+                <div id="div-MaxAtk">
+                    <label for="char-MaxAtk">{{ .Labels.CharMaxAtk }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMaxAtk}}" id="char-MaxAtk">
+                </div>
+                <div id="div-PhysicalResist">
+                    <label for="char-PhysicalResist">{{ .Labels.CharPhysicalResist }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharPhysicalResist}}" id="char-PhysicalResist">
+                </div>
+                <div id="div-Defense">
+                    <label for="char-Defense">{{ .Labels.CharDefense }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharDefense}}" id="char-Defense">
+                </div>
+                <div id="div-HitRate">
+                    <label for="char-HitRate">{{ .Labels.CharHitRate }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharHitRate}}" id="char-HitRate">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Flee">
+                    <label for="char-Flee">{{ .Labels.CharFlee }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharFlee}}" id="char-Flee">
+                </div>
+                <div id="div-MonsterCriticalRate">
+                    <label for="char-MonsterCriticalRate">{{ .Labels.CharMonsterCriticalRate }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMonsterCriticalRate}}" id="char-MonsterCriticalRate">
+                </div>
+                <div id="div-MF">
+                    <label for="char-MF">{{ .Labels.CharMF }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMF}}" id="char-MF">
+                </div>
+                <div id="div-HREC">
+                    <label for="char-HREC">{{ .Labels.CharHREC }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharHREC}}" id="char-HREC">
+                </div>
+                <div id="div-SREC">
+                    <label for="char-SREC">{{ .Labels.CharSREC }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharSREC}}" id="char-SREC">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-ASPDofMonster">
+                    <label for="char-ASPDofMonster">{{ .Labels.CharASPDofMonster }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharASPDofMonster}}" id="char-ASPDofMonster">
+                </div>
+                <div id="div-AreaOfDetection">
+                    <label for="char-AreaOfDetection">{{ .Labels.CharAreaOfDetection }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharAreaOfDetection}}" id="char-AreaOfDetection">
+                </div>
+                <div id="div-AfterDetectionChaseArea">
+                    <label for="char-AfterDetectionChaseArea">{{ .Labels.CharAfterDetectionChaseArea }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharAfterDetectionChaseArea}}" id="char-AfterDetectionChaseArea">
+                </div>
+                <div id="div-MSPD">
+                    <label for="char-MSPD">{{ .Labels.CharMSPD }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMSPD}}" id="char-MSPD">
+                </div>
+                <div id="div-Col">
+                    <label for="char-Col">{{ .Labels.CharCol }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharCol}}" id="char-Col">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Str">
+                    <label for="char-Str">{{ .Labels.CharStr }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharStr}}" id="char-Str">
+                </div>
+                <div id="div-Agi">
+                    <label for="char-Agi">{{ .Labels.CharAgi }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharAgi}}" id="char-Agi">
+                </div>
+                <div id="div-Dex">
+                    <label for="char-Dex">{{ .Labels.CharDex }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharDex}}" id="char-Dex">
+                </div>
+                <div id="div-Con">
+                    <label for="char-Con">{{ .Labels.CharCon }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharCon}}" id="char-Con">
+                </div>
+                <div id="div-Sta">
+                    <label for="char-Sta">{{ .Labels.CharSta }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharSta}}" id="char-Sta">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Luk">
+                    <label for="char-Luk">{{ .Labels.CharLuk }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharLuk}}" id="char-Luk">
+                </div>
+                <div id="div-LeftRad">
+                    <label for="char-LeftRad">{{ .Labels.CharLeftRad }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharLeftRad}}" id="char-LeftRad">
+                </div>
+                <div id="div-Guild">
+                    <label for="char-Guild">{{ .Labels.CharGuild }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharGuild}}" id="char-Guild">
+                </div>
+                <div id="div-Title">
+                    <label for="char-Title">{{ .Labels.CharTitle }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTitle}}" id="char-Title">
+                </div>
+                <div id="div-Job">
+                    <label for="char-Job">{{ .Labels.CharJob }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharJob}}" id="char-Job">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-ExpGainedFromKill">
+                    <label for="char-ExpGainedFromKill">{{ .Labels.CharExpGainedFromKill }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharExpGainedFromKill}}" id="char-ExpGainedFromKill">
+                </div>
+                <div id="div-Nexp">
+                    <label for="char-Nexp">{{ .Labels.CharNexp }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharNexp}}" id="char-Nexp">
+                </div>
+                <div id="div-Fame">
+                    <label for="char-Fame">{{ .Labels.CharFame }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharFame}}" id="char-Fame">
+                </div>
+                <div id="div-Ap">
+                    <label for="char-Ap">{{ .Labels.CharAp }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharAp}}" id="char-Ap">
+                </div>
+                <div id="div-Tp">
+                    <label for="char-Tp">{{ .Labels.CharTp }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTp}}" id="char-Tp">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Gd">
+                    <label for="char-Gd">{{ .Labels.CharGd }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharGd}}" id="char-Gd">
+                </div>
+                <div id="div-Spri">
+                    <label for="char-Spri">{{ .Labels.CharSpri }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharSpri}}" id="char-Spri">
+                </div>
+                <div id="div-Stor">
+                    <label for="char-Stor">{{ .Labels.CharStor }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharStor}}" id="char-Stor">
+                </div>
+                <div id="div-MxSail">
+                    <label for="char-MxSail">{{ .Labels.CharMxSail }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharMxSail}}" id="char-MxSail">
+                </div>
+                <div id="div-Sail">
+                    <label for="char-Sail">{{ .Labels.CharSail }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharSail}}" id="char-Sail">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Stasa">
+                    <label for="char-Stasa">{{ .Labels.CharStasa }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharStasa}}" id="char-Stasa">
+                </div>
+                <div id="div-Scsm">
+                    <label for="char-Scsm">{{ .Labels.CharScsm }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharScsm}}" id="char-Scsm">
+                </div>
+                <div id="div-Tstr">
+                    <label for="char-Tstr">{{ .Labels.CharTstr }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTstr}}" id="char-Tstr">
+                </div>
+                <div id="div-Tagi">
+                    <label for="char-Tagi">{{ .Labels.CharTagi }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTagi}}" id="char-Tagi">
+                </div>
+                <div id="div-Tdex">
+                    <label for="char-Tdex">{{ .Labels.CharTdex }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTdex}}" id="char-Tdex">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Tcon">
+                    <label for="char-Tcon">{{ .Labels.CharTcon }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTcon}}" id="char-Tcon">
+                </div>
+                <div id="div-Tsta">
+                    <label for="char-Tsta">{{ .Labels.CharTsta }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTsta}}" id="char-Tsta">
+                </div>
+                <div id="div-Tluk">
+                    <label for="char-Tluk">{{ .Labels.CharTluk }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTluk}}" id="char-Tluk">
+                </div>
+                <div id="div-Tmxhp">
+                    <label for="char-Tmxhp">{{ .Labels.CharTmxhp }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTmxhp}}" id="char-Tmxhp">
+                </div>
+                <div id="div-Tmxsp">
+                    <label for="char-Tmxsp">{{ .Labels.CharTmxsp }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTmxsp}}" id="char-Tmxsp">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Tatk">
+                    <label for="char-Tatk">{{ .Labels.CharTatk }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTatk}}" id="char-Tatk">
+                </div>
+                <div id="div-Tdef">
+                    <label for="char-Tdef">{{ .Labels.CharTdef }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTdef}}" id="char-Tdef">
+                </div>
+                <div id="div-Thit">
+                    <label for="char-Thit">{{ .Labels.CharThit }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharThit}}" id="char-Thit">
+                </div>
+                <div id="div-Tflee">
+                    <label for="char-Tflee">{{ .Labels.CharTflee }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTflee}}" id="char-Tflee">
+                </div>
+                <div id="div-Tmf">
+                    <label for="char-Tmf">{{ .Labels.CharTmf }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTmf}}" id="char-Tmf">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Tcrt">
+                    <label for="char-Tcrt">{{ .Labels.CharTcrt }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTcrt}}" id="char-Tcrt">
+                </div>
+                <div id="div-Threc">
+                    <label for="char-Threc">{{ .Labels.CharThrec }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharThrec}}" id="char-Threc">
+                </div>
+                <div id="div-Tsrec">
+                    <label for="char-Tsrec">{{ .Labels.CharTsrec }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTsrec}}" id="char-Tsrec">
+                </div>
+                <div id="div-Taspd">
+                    <label for="char-Taspd">{{ .Labels.CharTaspd }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTaspd}}" id="char-Taspd">
+                </div>
+                <div id="div-Tadis">
+                    <label for="char-Tadis">{{ .Labels.CharTadis }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTadis}}" id="char-Tadis">
+                </div>
+            </div>
+            <div class="char_row">
+                    
+                <div id="div-Tspd">
+                    <label for="char-Tspd">{{ .Labels.CharTspd }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTspd}}" id="char-Tspd">
+                </div>
+                <div id="div-Tspri">
+                    <label for="char-Tspri">{{ .Labels.CharTspri }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTspri}}" id="char-Tspri">
+                </div>
+                <div id="div-Tscsm">
+                    <label for="char-Tscsm">{{ .Labels.CharTscsm }}</label>
+                    <input type="text" placeholder="{{ .Placeholders.CharTscsm}}" id="char-Tscsm">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{{ end }}

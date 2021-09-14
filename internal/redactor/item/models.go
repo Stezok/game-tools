@@ -1,4 +1,4 @@
-package itemredactor
+package item
 
 type Item struct {
 	ID                              string `item:"//ID" json:"ID"`

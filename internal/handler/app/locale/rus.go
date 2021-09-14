@@ -6,6 +6,8 @@ var RU_INDEX_LOCALE = IndexTemplate{
 	Text: IndexText{
 		ItemDeleted: "Предмет был удален.",
 		ItemReturn:  "Восстановить",
+		CharDeleted: "Монстр был удален.",
+		CharReturn:  "Восстановить",
 	},
 
 	Placeholders: IndexPlaceholdes{
