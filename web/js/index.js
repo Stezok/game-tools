@@ -68,7 +68,7 @@ function pick_item_node(id) {
 	document.getElementById("remove-item").style.display = "block"
 	document.getElementById("remove-item").dataset.id = item.uniq_id
 	
-	document.querySelector("redactor")[0].style.display = "block"
+	document.querySelector("#item_red_container .redactor").style.display = "block"
 
 	let name_label = document.getElementById("name-label")
 	name_label.innerHTML = item.Name
@@ -949,7 +949,7 @@ async function init() {
 		items[id].deleted = true
 
 		event.target.style.display = "none"
-		document.getElementsByClassName("redactor")[0].style.display = "none"
+		document.querySelector("#item_red_container .redactor").style.display = "none"
 	
 		let search = document.getElementById("item-search-bar").value
 		if(search == "") {
