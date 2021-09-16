@@ -42,7 +42,7 @@ func (h *AppHandler) HandlePostItems(ctx *gin.Context) {
 		return
 	}
 
-	file, err := os.Create("item.txt")
+	file, err := os.Create("ItemInfo.txt")
 	if err != nil {
 		h.Logger.Print(err)
 		ctx.AbortWithStatus(http.StatusInternalServerError)
@@ -78,7 +78,7 @@ func (h *AppHandler) HandlePostCharacters(ctx *gin.Context) {
 		return
 	}
 
-	file, err := os.Create("character.txt")
+	file, err := os.Create("CharacterInfo.txt")
 	if err != nil {
 		h.Logger.Print(err)
 		ctx.AbortWithStatus(http.StatusInternalServerError)

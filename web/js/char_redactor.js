@@ -26,6 +26,7 @@ async function request_characters() {
 function make_char_node(char) {
 	return `
 		<div class="node" id="char${char.uniq_id}" onclick="pick_char_node(${char.uniq_id})">
+			<img src="/image/monsters/icons/${char.ID}.png" onerror='this.src="/image/mock.jpg"'>
 			<span>${char.ID} ${char.Description}</span>
 		</div>`
 }
@@ -46,10 +47,16 @@ function pick_char_node(id) {
 	remove.style.display = "block"
 	remove.dataset.id = id
 
+	document.querySelector("#char-view img").src = `/image/monsters/images/${characters[id].ID}.png`
+	document.querySelector("#char-view img").onerror = (event) => {
+		event.currentTarget.src = ""
+	}
+
 	char_ID = document.getElementById("char-ID")
 	char_ID.value = char.ID
 	char_ID.oninput = () => {
 		characters[id].ID = char_ID.value
+		document.querySelector(`#char${id} img`).src = `/image/monsters/icons/${characters[id].ID}.png`
 		document.querySelector(`#char${id} span`).innerHTML = `${characters[id].ID} ${characters[id].Description}`
 	}
 

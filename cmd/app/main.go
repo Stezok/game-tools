@@ -15,8 +15,8 @@ func main() {
 		PathToImages:    "../../assets",
 		PathToHTML:      "../../web/html/*.html",
 
-		ItemService:      item.NewItemService("./item.txt"),
-		CharacterService: character.NewCharacterService("./character.txt"),
+		ItemService:      item.NewItemService("./ItemInfo.txt"),
+		CharacterService: character.NewCharacterService("./CharacterInfo.txt"),
 		Logger:           log.Default(),
 	}
 

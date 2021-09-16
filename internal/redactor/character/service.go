@@ -61,6 +61,10 @@ func (cs *CharacterService) GetCharacters() (characters []Character, err error) 
 	return
 }
 
+func (cs *CharacterService) encode(s string) []byte {
+	return []byte(s)
+}
+
 func (cs *CharacterService) WriteCharacters(w io.Writer, characters []Character) error {
 	bufferArr := make([]byte, 0, 1024*128) // 128 Kb buffer
 	buffer := bytes.NewBuffer(bufferArr)
@@ -70,9 +74,9 @@ func (cs *CharacterService) WriteCharacters(w io.Writer, characters []Character)
 	for ii := 0; ii < characterType.NumField(); ii++ {
 		characterTag := characterType.Field(ii).Tag.Get("character")
 		if ii != 0 {
-			buffer.Write([]byte("\t"))
+			buffer.Write(cs.encode("\t"))
 		}
-		buffer.Write([]byte(characterTag))
+		buffer.Write(cs.encode(characterTag))
 	}
 	_, err := io.Copy(w, buffer)
 	if err != nil {
@@ -80,14 +84,14 @@ func (cs *CharacterService) WriteCharacters(w io.Writer, characters []Character)
 	}
 
 	for _, character := range characters {
-		buffer.Write([]byte("\r\n"))
+		buffer.Write(cs.encode("\r\n"))
 		vcharacter := reflect.ValueOf(character)
 		for i := 0; i < vcharacter.NumField(); i++ {
 			data := vcharacter.Field(i).String()
 			if i != 0 {
-				buffer.Write([]byte("\t"))
+				buffer.Write(cs.encode("\t"))
 			}
-			buffer.Write([]byte(data))
+			buffer.Write(cs.encode(data))
 		}
 		_, err = io.Copy(w, buffer)
 		if err != nil {

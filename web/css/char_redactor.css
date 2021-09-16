@@ -37,6 +37,11 @@
 	margin-left: 5px;
 }
 
+.char-list .node img {
+	max-width: 42px;
+	max-height: 42px;
+}
+
 #char-list .node span {
 	cursor: default;
 }
@@ -47,10 +52,6 @@
 
 #char-list .node.picked {
 	background-color: rgba(255, 255, 255, 0.1);	
-}
-
-#div-char-name {
-	margin-bottom: 15px;
 }
 
 .char_row {
